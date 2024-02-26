@@ -1,9 +1,11 @@
 
-import 'package:buyrent/editprofile.dart';
+import 'package:buyrent/screens/profile_pages/editprofile.dart';
+import 'package:buyrent/screens/profile_pages/sellrent_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'controllers/profileController.dart';
+
+import '../../providers/profile_providers.dart';
 
 
 
@@ -17,9 +19,10 @@ import 'controllers/profileController.dart';
 
 class _ProfilePageState extends State<ProfilePage> {
 
+
   @override
   Widget build(BuildContext context) {
-    final profile = Provider.of<ProfileController>(context);
+    final controller = Provider.of<UserController>(context);
 
     return Scaffold(
 
@@ -31,36 +34,12 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 20,),
             Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: CircleAvatar(
-
-                radius: 50,
-                backgroundImage: AssetImage('assets/profilepic3.png')
-              ),
+              padding: const EdgeInsets.all(16),
+              child: CircleAvatar(child: Image.asset("/profilepic3.png"),maxRadius: 60),
             ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'John Doe',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                'Flutter Developer',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
+            SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -69,12 +48,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   padding: const EdgeInsets.only(right: 20),
                   child: ElevatedButton(
-                      onPressed: (){ Navigator.push(
+                      onPressed: (){
+                        Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ProfileCreation(
 
                         )),
-                      );},
+                      );
+                        },
                       child: Text("Edit Profile")
                   ),
                 ),
@@ -85,16 +66,36 @@ class _ProfilePageState extends State<ProfilePage> {
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 child: ListTile(
                   leading: Icon(Icons.person),
-                  title: Text(profile.name == null?"":profile.name!),
+                  title: Text("${controller.name}"),
                 ),
               ),
               Card(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: ListTile(
                   leading: Icon(Icons.email),
-                  title: Text(profile.name == null?"":profile.email!),
+                  title: Text("${controller.email}"),
+                ),
+              ),Card(
+                margin: EdgeInsets.symmetric(horizontal: 20,),
+                child: ListTile(
+                  leading: Icon(Icons.numbers),
+                  title: Text("${controller.number}"),
                 ),
               ),
+
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => SellPage()),
+                    );
+                  },
+                  child: Text("Sell/Rent")),
+            )
+
 
           ],
         ),

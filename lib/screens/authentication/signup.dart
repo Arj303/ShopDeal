@@ -1,5 +1,5 @@
-import 'package:buyrent/Feed.dart';
-import 'package:buyrent/loginpage.dart';
+import 'package:buyrent/screens/home/feed_home.dart';
+import 'package:buyrent/screens/authentication/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class _SignupPageState extends State<SignupPage> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+
 
 
   Future<void> signUp() async {
@@ -84,7 +84,6 @@ class _SignupPageState extends State<SignupPage> {
                   children: <Widget>[
                     TextFormField( decoration: InputDecoration(labelText: 'Email'),controller: emailController,),
                     TextFormField( decoration: InputDecoration(labelText: 'Password'),controller: passwordController, obscureText: true,),
-                    TextFormField( decoration: InputDecoration(labelText: 'Confirm Password'),controller: confirmPasswordController, obscureText: true,),
                   ],
                 ),
 

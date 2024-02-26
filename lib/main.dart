@@ -1,22 +1,25 @@
-import 'package:buyrent/ProfilePage.dart';
-import 'package:buyrent/controllers/profileController.dart';
-import 'package:buyrent/editprofile.dart';
-import 'package:buyrent/loginpage.dart';
-import 'package:buyrent/test.dart';
+import 'package:buyrent/providers/post_providers.dart';
+import 'package:buyrent/providers/profile_providers.dart';
+import 'package:buyrent/screens/authentication/profileInfo.dart';
+import 'package:buyrent/screens/feed_pages/buypage.dart';
+import 'package:buyrent/screens/profile_pages/ProfilePage.dart';
+import 'package:buyrent/screens/profile_pages/editprofile.dart';
+import 'package:buyrent/screens/authentication/loginpage.dart';
+import 'package:buyrent/screens/profile_pages/sellrent_page.dart';
+import 'package:buyrent/screens/profile_pages/test.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'Feed.dart';
-import 'firebase_options.dart';
+import 'screens/home/feed_home.dart';
+import 'firebase/firebase_options.dart';
 
-import 'homepage.dart';
+import 'screens/authentication/homepage.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
+  await Firebase.initializeApp(options:
+  DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,8 +29,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return    ChangeNotifierProvider(
-        create: (context) => ProfileController(), // Provide the Counter instance
+    return    MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => UserController()),
+          ChangeNotifierProvider(create: (context) => UserController1()),
+        ], // Provide the Counter instance
     child:MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: FeedPage(),
+      home: SellPage(),
     ));
   }
 }

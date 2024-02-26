@@ -1,5 +1,5 @@
-import 'package:buyrent/Feed.dart';
-import 'package:buyrent/signup.dart';
+import 'package:buyrent/screens/home/feed_home.dart';
+import 'package:buyrent/screens/authentication/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

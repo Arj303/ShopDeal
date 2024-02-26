@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class BuyPage extends StatefulWidget {
   const BuyPage({super.key});
 
@@ -9,10 +10,6 @@ class BuyPage extends StatefulWidget {
 class _BuyPageState extends State<BuyPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Feed",style: TextStyle(color: Colors.blue),),
-      ),
-    );
+    return const Placeholder();
   }
 }

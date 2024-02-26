@@ -1,4 +1,4 @@
-import 'package:buyrent/signup.dart';
+import 'package:buyrent/screens/authentication/signup.dart';
 import 'package:flutter/material.dart';
 
 import 'loginpage.dart';
