@@ -2,6 +2,7 @@ import 'package:buyrent/providers/post_providers.dart';
 import 'package:buyrent/providers/profile_providers.dart';
 import 'package:buyrent/screens/authentication/profileInfo.dart';
 import 'package:buyrent/screens/feed_pages/buypage.dart';
+import 'package:buyrent/screens/feed_pages/postpage.dart';
 import 'package:buyrent/screens/profile_pages/ProfilePage.dart';
 import 'package:buyrent/screens/profile_pages/editprofile.dart';
 import 'package:buyrent/screens/authentication/loginpage.dart';
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SellPage(),
+      home: LoginPage(),
     ));
   }
 }

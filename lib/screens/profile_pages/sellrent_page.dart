@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:buyrent/screens/feed_pages/buypage.dart';
 import 'package:buyrent/screens/home/feed_home.dart';
+import 'package:buyrent/screens/profile_pages/ProfilePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/post_providers.dart';
+import '../../providers/profile_providers.dart';
 
 class SellPage extends StatefulWidget {
   const SellPage({super.key});
@@ -20,7 +23,7 @@ class SellPage extends StatefulWidget {
 class _SellPageState extends State<SellPage> {
   String? _selectedDate;
   String? _selectedValue;
-  String? _selectedTime;
+  String _selectedTime="";
 
   List<String> _values = ['Sell', 'Rent'];
   List<String> _times = ['Weekly', 'Monthly', 'Yearly'];
@@ -43,13 +46,22 @@ class _SellPageState extends State<SellPage> {
 
   String? img;
 
+
+
+
+
+
   final TextEditingController name1 = TextEditingController();
   final TextEditingController amount1 = TextEditingController();
 
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<UserController1>(context);
+    final controller1 = Provider.of<UserController1>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -72,8 +84,8 @@ class _SellPageState extends State<SellPage> {
               ),
               img == null
                   ? SizedBox(
-                      width: 8.0,
-                    )
+                width: 8.0,
+              )
                   : Image.network(img!),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -86,14 +98,14 @@ class _SellPageState extends State<SellPage> {
 
                       if (file == null) return;
                       String uniqueFileName =
-                          DateTime.now().millisecondsSinceEpoch.toString();
+                      DateTime.now().millisecondsSinceEpoch.toString();
                       Reference referenceRoot = FirebaseStorage.instance.ref();
                       Reference referenceDirImages =
-                          referenceRoot.child('images');
+                      referenceRoot.child('images');
 
                       //Create a reference for the image to be stored
                       Reference referenceImageToUpload =
-                          referenceDirImages.child(uniqueFileName + ".png");
+                      referenceDirImages.child(uniqueFileName + ".png");
 
                       //Handle errors/success
                       try {
@@ -101,7 +113,7 @@ class _SellPageState extends State<SellPage> {
                         await referenceImageToUpload.putFile(File(file.path));
                         //Success: get the download URL
                         var imageUrl =
-                            await referenceImageToUpload.getDownloadURL();
+                        await referenceImageToUpload.getDownloadURL();
 
                         print(imageUrl);
                         setState(() {
@@ -197,108 +209,113 @@ class _SellPageState extends State<SellPage> {
               ),
               _selectedValue == "Rent"
                   ? Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Amount:",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              controller: amount1,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                label: Text("Rs"),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: DropdownButtonFormField<String>(
-                              value: _selectedTime,
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedTime = value;
-                                  _selectedTime.toString();
-                                });
-                                print(_selectedTime);
-                              },
-                              items: _times.map((String option) {
-                                return DropdownMenuItem<String>(
-                                  value: option,
-                                  child: Text(option),
-                                );
-                              }).toList(),
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'Select Option',
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  controller.addUser1(name: name1.text,dop: _selectedDate.toString(),sr: _selectedValue,amount: amount1.text,dor: _selectedTime);
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => FeedPage()),
-                                  );
-                                }, child: Text("Submit")),
-                          ),
-                        ],
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Amount:",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(fontSize: 18),
                       ),
-                    )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Amount:",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              controller: amount1,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                label: Text("Rs"),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                                onPressed: () {
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: amount1,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text("Rs"),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DropdownButtonFormField<String>(
+                        value: _selectedTime,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedTime = value!;
+                            _selectedTime.toString();
+                          });
+                          print(_selectedTime);
+                        },
+                        items: _times.map((String option) {
+                          return DropdownMenuItem<String>(
+                            value: option,
+                            child: Text(option),
+                          );
+                        }).toList(),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Select Option',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            controller1.addUser1(name: name1.text,dop: _selectedDate.toString(),sr: _selectedValue,amount: amount1.text,dor: _selectedTime,imgUrl: img);
+                            controller1.fetchData1();
+                            // BuyPage();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => FeedPage()),
+                            );
 
-                                  controller.addUser1(name: name1.text,dop: _selectedDate.toString(),sr: _selectedValue,amount: amount1.text,dor: _selectedTime);
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => FeedPage()),
-                                  );
-                                },
-                                child: Text("Submit")),
-                          ),
-                        ]),
+                          }, child: Text("Submit")),
+                    ),
+                  ],
+                ),
+              )
+                  : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Amount:",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: amount1,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text("Rs"),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                          onPressed: () {
+
+                            controller1.addUser1(name: name1.text,dop: _selectedDate.toString(),sr: _selectedValue,amount: amount1.text,dor: _selectedTime,imgUrl: img);
+                            controller1.fetchData1();
+                            // BuyPage();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => FeedPage()),
+                            );
+                          },
+                          child: Text("Submit")),
+                    ),
+                  ]),
             ],
           ),
         ),
@@ -311,4 +328,3 @@ class _SellPageState extends State<SellPage> {
 
 
 }
-
