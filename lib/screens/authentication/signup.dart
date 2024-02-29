@@ -1,3 +1,4 @@
+import 'package:buyrent/screens/authentication/profileInfo.dart';
 import 'package:buyrent/screens/home/feed_home.dart';
 import 'package:buyrent/screens/authentication/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +27,7 @@ class _SignupPageState extends State<SignupPage> {
       // Navigate to home screen after successful sign-up
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => ProfileInfo()),
       );
     } catch (e) {
       print("Error: $e");

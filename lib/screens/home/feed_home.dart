@@ -29,14 +29,14 @@ class _FeedPageState extends State<FeedPage> {
       _currentIndex = index;
     });
   }
-@override
-  void initState() {
-    Provider.of<UserController>(context,listen: false).fetchData();
-    Provider.of<UserController1>(context,listen: false).fetchData1();
-
-
-    super.initState();
-  }
+// @override
+//   void initState() {
+//     Provider.of<UserController>(context,listen: false).fetchData();
+//     // Provider.of<UserController1>(context,listen: false).fetchData1();
+//
+//
+//     super.initState();
+//   }
 
 
   @override

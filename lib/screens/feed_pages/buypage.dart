@@ -1,9 +1,12 @@
 
 import 'package:buyrent/screens/feed_pages/postpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/post_providers.dart';
+import '../../providers/profile_providers.dart';
 
 class BuyPage extends StatefulWidget {
   const BuyPage({super.key});
@@ -14,45 +17,41 @@ class BuyPage extends StatefulWidget {
 
 class _BuyPageState extends State<BuyPage> {
 
-
-
+  @override
+  void initState() {
+    Provider.of<UserController>(context,listen: false).fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final uid=FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
-        body:
-        SingleChildScrollView(
-          child: Container(
-            color: Colors.blue,
-            height: MediaQuery.of(context).size.height - 50,
-            width: double.infinity,
-            child: Column(
-                children: [
+        body:StreamBuilder(
+          stream: FirebaseFirestore.instance.collection("Post").where("userId",isNotEqualTo: uid).snapshots(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  final data=snapshot.data!.docs[index];
+                 return PostPage(
+                    name: data["name"],
+                   amount:data["amount"] ,
+                   dop: data["dop"],
+                   dor: data["dor"],
+                   imgUrl: data["imageURL"],
+                   sr: data["sr"],
+                   postUserId: data["userId"],
 
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Center(
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(25),),
-                              border: Border.all(color: Colors.black),
-                              color: Colors.white,
 
-                            
-                          ),
-                          width: MediaQuery.sizeOf(context).width*0.85,
-                            height: 400,
 
-                            child: PostPage(),
-                        ),
-                      ),
-                    ),
+                  );
+                }
 
-                ],
-              ),
-            ),
+            );
+          },
+        )
 
-        ),
 
 
       );

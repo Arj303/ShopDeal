@@ -21,14 +21,17 @@ class UserController1 extends ChangeNotifier {
    String? imgUrl})async{
     final uid=FirebaseAuth.instance.currentUser!.uid;
     try{
-      await FirebaseFirestore.instance.collection("Post").doc(uid).set({
+      var time=DateTime.now();
+      await FirebaseFirestore.instance.collection("Post").doc(time.toString()).set({
       "name":name,
       "dop":dop,
       "sr":sr,
       "amount":amount,
       "dor":dor,
-        "imageURL":imgUrl
-      });
+        "imageURL":imgUrl,
+        "userId":uid,
+        "time":time.toString()
+      },);
     }
     catch(e){
       print(e);
@@ -61,6 +64,17 @@ class UserController1 extends ChangeNotifier {
        notifyListeners();
        return data;
      }
+   }
+
+   Future request(String postUserId,String senderName,String number ) async{
+     final userId = FirebaseAuth.instance.currentUser!.uid;
+     await FirebaseFirestore.instance.collection("request").doc(userId).set({
+       "senderId":userId,
+       "postUserID":postUserId,
+       "senderName":senderName,
+     "senderNumber":number,
+       "request":"pending"
+     });
    }
 
 

@@ -62,7 +62,7 @@ class _SellPageState extends State<SellPage> {
   @override
   Widget build(BuildContext context) {
     final controller1 = Provider.of<UserController1>(context);
-
+    final controller2 = Provider.of<UserController1>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff0095FF),
@@ -264,6 +264,7 @@ class _SellPageState extends State<SellPage> {
                           onPressed: () {
                             controller1.addUser1(name: name1.text,dop: _selectedDate.toString(),sr: _selectedValue,amount: amount1.text,dor: _selectedTime,imgUrl: img);
                             controller1.fetchData1();
+                            controller2.fetchData1();
                             // BuyPage();
                             Navigator.pushReplacement(
                               context,
@@ -307,6 +308,7 @@ class _SellPageState extends State<SellPage> {
 
                             controller1.addUser1(name: name1.text,dop: _selectedDate.toString(),sr: _selectedValue,amount: amount1.text,dor: _selectedTime,imgUrl: img);
                             controller1.fetchData1();
+                            controller2.fetchData1();
                             // BuyPage();
                             Navigator.pushReplacement(
                               context,
