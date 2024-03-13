@@ -5,7 +5,7 @@ import 'package:buyrent/screens/chat_pages/chatpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/post_providers.dart';
+
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -19,9 +19,9 @@ class _FeedPageState extends State<FeedPage> {
 
 
   final List<Widget> _screens = [
-    BuyPage(),
-    ChatPage(),
-    ProfilePage(),
+    const BuyPage(),
+    const ChatPage(),
+    const ProfilePage(),
   ];
 
   void _onTabTapped(int index) {
@@ -29,20 +29,14 @@ class _FeedPageState extends State<FeedPage> {
       _currentIndex = index;
     });
   }
-// @override
-//   void initState() {
-//     Provider.of<UserController>(context,listen: false).fetchData();
-//     // Provider.of<UserController1>(context,listen: false).fetchData1();
-//
-//
-//     super.initState();
-//   }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:_screens[_currentIndex] ,
+
+      body:
+      _screens[_currentIndex] ,
       bottomNavigationBar: BottomNavigationBar(
 
         items: const <BottomNavigationBarItem>[
@@ -56,8 +50,8 @@ class _FeedPageState extends State<FeedPage> {
 
 
           BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
+          icon: Icon(Icons.message),
+          label: 'Request',
           ),
 
 

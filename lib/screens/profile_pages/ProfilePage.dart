@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: CircleAvatar(child: Image.asset("assets/profilepic3.png"),maxRadius: 60),

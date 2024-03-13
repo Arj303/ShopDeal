@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/post_providers.dart';
 import '../../providers/profile_providers.dart';
 
 class BuyPage extends StatefulWidget {
@@ -26,11 +25,16 @@ class _BuyPageState extends State<BuyPage> {
   @override
   Widget build(BuildContext context) {
     final uid=FirebaseAuth.instance.currentUser!.uid;
+    final controller=Provider.of<UserController>(context);
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Welcome ${controller.name}"),
+        ),
         body:StreamBuilder(
           stream: FirebaseFirestore.instance.collection("Post").where("userId",isNotEqualTo: uid).snapshots(),
           builder: (context, snapshot) {
-            return ListView.builder(
+
+            return snapshot.hasData?snapshot.data!.docs.isEmpty?const Center(child: Text("No products available"),):ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   final data=snapshot.data!.docs[index];
@@ -48,7 +52,7 @@ class _BuyPageState extends State<BuyPage> {
                   );
                 }
 
-            );
+            ):const CircularProgressIndicator();
           },
         )
 

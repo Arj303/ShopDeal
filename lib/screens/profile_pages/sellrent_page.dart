@@ -1,17 +1,11 @@
 import 'dart:io';
-
-import 'package:buyrent/screens/feed_pages/buypage.dart';
 import 'package:buyrent/screens/home/feed_home.dart';
-import 'package:buyrent/screens/profile_pages/ProfilePage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/post_providers.dart';
-import '../../providers/profile_providers.dart';
 
 class SellPage extends StatefulWidget {
   const SellPage({super.key});
@@ -252,7 +246,7 @@ class _SellPageState extends State<SellPage> {
                             child: Text(option),
                           );
                         }).toList(),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Select Option',
                         ),

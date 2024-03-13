@@ -1,5 +1,4 @@
-// import 'package:cached_network_image/cached_network_image.dart';
-import 'package:buyrent/screens/chat_pages/chatpage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +28,6 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
 
-  @override
 
   
 
@@ -38,7 +36,7 @@ class _PostPageState extends State<PostPage> {
     final controller = Provider.of<UserController1>(context);
     final controller1 = Provider.of<UserController>(context);
     return Card(
-      margin: EdgeInsets.all(12),
+      margin: const EdgeInsets.all(12),
       surfaceTintColor: Colors.blue,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -52,57 +50,51 @@ class _PostPageState extends State<PostPage> {
                   padding: const EdgeInsets.all(4.0),
                   child: Text("Item: ${widget.name}"),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text("Date of Purchase: ${widget.dop}"),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text("Sell/Rent: ${widget.sr}"),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 widget.dop == "Rent" ?
-      
-      
-                      Container(
-                        child: Column(
-                          children:[
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text("Amount: ${widget.amount}"),
-                          ),
-                          SizedBox(height: 4),
-                          ],
-                        ),
-                      )
+                Column(
+                  children:[
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text("Amount: ${widget.amount}"),
+                  ),
+                  const SizedBox(height: 4),
+                  ],
+                )
                     :
       
       
-                  Container(
-                    child: Column(
-                      children:[
-      
-      
-      
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text("mode of rent: ${widget.dor}"),
-                        ),
-                        SizedBox(height: 4),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text("Amount: ${widget.amount}"),
-                        ),
-      
-      
-                        SizedBox(height: 4),
-                      ],
-                    ),
+                  Column(
+                    children:[
+
+
+
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text("mode of rent: ${widget.dor}"),
+                      ),
+                      const SizedBox(height: 4),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text("Amount: ${widget.amount}"),
+                      ),
+
+
+                      const SizedBox(height: 4),
+                    ],
                   ),
       
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
       
                 TextButton(
                     onPressed: (){
@@ -112,7 +104,7 @@ class _PostPageState extends State<PostPage> {
                       //   MaterialPageRoute(builder: (context) => ChatPage()),
                       // );
                     },
-                    child: Text("I'm Interested")),
+                    child: const Text("I'm Interested")),
       
       
       

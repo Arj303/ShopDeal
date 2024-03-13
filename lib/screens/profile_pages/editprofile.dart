@@ -1,7 +1,6 @@
 
 import 'package:buyrent/providers/profile_providers.dart';
 import 'package:buyrent/screens/profile_pages/ProfilePage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class ProfileCreation extends StatefulWidget {
 
-   ProfileCreation({super.key});
+   const ProfileCreation({super.key});
 
   @override
   State<ProfileCreation> createState() => _ProfileCreationState();
@@ -29,7 +28,7 @@ class _ProfileCreationState extends State<ProfileCreation> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
           height: MediaQuery.of(context).size.height - 50,
           width: double.infinity,
           child: Column(
@@ -38,13 +37,13 @@ class _ProfileCreationState extends State<ProfileCreation> {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  Text("Edit Profile",
+                  const Text("Edit Profile",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
 
                     ),),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Text("edit your profile information",
                     style: TextStyle(
                         fontSize: 15,
@@ -55,14 +54,14 @@ class _ProfileCreationState extends State<ProfileCreation> {
               ),
               Column(
                 children: <Widget>[
-                  TextFormField( decoration: InputDecoration(labelText: 'Name'),controller: name1,),
-                  TextFormField( decoration: InputDecoration(labelText: 'Email'),controller: email1,),
-                  TextFormField( decoration: InputDecoration(labelText: 'Phone number'),controller: number1,),
+                  TextFormField( decoration: const InputDecoration(labelText: 'Name'),controller: name1,),
+                  TextFormField( decoration: const InputDecoration(labelText: 'Email'),controller: email1,),
+                  TextFormField( decoration: const InputDecoration(labelText: 'Phone number'),controller: number1,),
                 ],
               ),
 
               Container(
-                padding: EdgeInsets.only(top: 3, left: 3),
+                padding: const EdgeInsets.only(top: 3, left: 3),
                 decoration:
                 BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
@@ -75,17 +74,17 @@ class _ProfileCreationState extends State<ProfileCreation> {
                     controller.fetchData();
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                      MaterialPageRoute(builder: (context) => const ProfilePage()),
                     );
                   },
-                  color: Color(0xff0095FF),
+                  color: const Color(0xff0095FF),
                   shape: RoundedRectangleBorder(
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: Color(0xff0095FF),
                       ),
                       borderRadius: BorderRadius.circular(50)
                   ),
-                  child: Text(
+                  child: const Text(
                     "Submit",
                     style: TextStyle(
                       color: Colors.white,

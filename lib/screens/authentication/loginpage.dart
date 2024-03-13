@@ -12,8 +12,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(text: "arjun@gmail.com");
+  final TextEditingController passwordController = TextEditingController(text: "123456");
 
   Future<void> signIn() async {
     try {
@@ -143,17 +143,6 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
 
-                Container(
-                  padding: EdgeInsets.only(top: 100),
-                  height: 200,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/background.png"),
-                        fit: BoxFit.fitHeight
-                    ),
-
-                  ),
-                )
 
               ],
             ))

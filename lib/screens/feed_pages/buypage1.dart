@@ -2,9 +2,7 @@ import 'package:buyrent/screens/feed_pages/postpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../providers/profile_providers.dart';
 
 class BuyPageUser extends StatefulWidget {
   const BuyPageUser({super.key});
@@ -25,7 +23,7 @@ class _BuyPageUserState extends State<BuyPageUser> {
           stream: FirebaseFirestore.instance.collection("Post").where("userId" ,isEqualTo: uid).snapshots(),
         builder: (context,snapshot) {
 
-            return ListView.builder(
+            return snapshot.hasData?snapshot.data!.docs.isEmpty?const Center(child: Text("No products available"),):ListView.builder(
               itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index){
                 final data = snapshot.data!.docs[index];
@@ -40,7 +38,7 @@ class _BuyPageUserState extends State<BuyPageUser> {
 
               );
     }
-            );
+            ):const CircularProgressIndicator();
 
         }
 
